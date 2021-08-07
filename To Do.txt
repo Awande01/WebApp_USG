@@ -1,7 +1,9 @@
 To-Do
 
-Please run the Api application
+-Please run the Api application
 
-Please change the api app setting from Web app - replace the value with you api url link.
+-Please change the api app setting from Web app - replace the value with you api url link.
 
  <add key="ApiUrl" value="https://localhost:44392/" />
+ 
+-Folder name DB have all databse scripts and tables
