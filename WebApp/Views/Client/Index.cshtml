@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<h1>Manage Client Details</h1>
+<div ng-app="myclientApp">
+    <div ng-controller="clientsController">
+        <div class="form-group">
+            <form name="addclient" style="width: 900px; margin: 0px auto;">
+                <div class="row">
+                    <div class="row">
+                        <label ng-model="ClientID" id="clientid" ng-hide="true"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="cname" class="col-sm-2 control-label">First Name:</label>
+                        <div class="col-sm-10 space">
+                            <input type="text" class="form-control" id="cFirstName" placeholder="please enter  name" ng-model="FirstName" required />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label for="address" class="col-sm-2 control-label">Last Name :</label>
+                        <div class="col-sm-10 space">
+                            <input class="form-control" id="cLastName" placeholder="please enter  surname" ng-model="LastName" required />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label for="country" class="col-sm-2 control-label">Gender:</label>
+                        <div class="col-sm-10 space">
+                            <select type="text" class="form-control" id="GenderID" ng-options="g.Name for g in gender" ng-model="SelectedGenderID" required>
+                                <option value="" label="Select"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>               
+                <br />
+                <div class="row">
+                    <div class="form-group space">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" value="Insert" ng-click="add()" ng-show="addShow" ng-disabled="!addclient.$valid" class="btn btn-primary" />
+                            <input type="submit" value="Update" ng-click="update()" ng-show="updateShow" ng-disabled="!addclient.$valid" class="btn btn-primary" />
+                            <input type="button" value="Reset" ng-click="cancel()" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>               
+                <br />
+            </form>
+        </div>
+        <br />
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" style="width: 800px; margin-left: 170px;">
+                            <tr >
+                                <th colspan="5"><input type="button" value="Dowload All Clients" ng-click="Dowload()" class="btn btn-primary" /></th>
+                            </tr>
+                            <tr>
+                                <th>Client ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Gender</th>
+                            </tr>
+                            <tr ng-repeat="client in clientList">
+                                <td>
+                                    <p>{{ client.ClientID}}</p>
+                                </td>
+                                <td>
+                                    <p>{{ client.FirstName }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ client.LastName }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ client.Name }}</p>
+                                </td>
+                                <td>
+                                    <p><a ng-click="edit(client)" href="javascript:void(0);">Edit</a> | <a ng-click="delete(client)" href="javascript:void(0);">Delete</a></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

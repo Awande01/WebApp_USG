@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<h1>Manage Client Contact Details</h1>
+<div ng-app="myApp">
+    <div ng-controller="contactController">
+        <div class="form-group">
+            <div class="row">
+                <form style="width: 900px; margin: 0px auto;">
+                    <div class="form-group">
+                        <label for="cname" class="col-sm-2 control-label">Search Client:</label>
+                        <div class="col-sm-3 space">
+                            <input type="number" class="form-control" id="cClientID" placeholder="Enter clientID" ng-model="ClientID" pattern="\d*"  required />
+                        </div>
+                        <div class="col-sm-7 space">
+                            <input type="button" value="Search" ng-click="Search(ClientID)" class="btn btn-success" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group" ng-show="ClientExist">
+                        <div class="form-group">
+                            <label for="address" class="col-sm-2 control-label">Client Full Name :</label>
+                            <div class="col-sm-9 space">
+                                <input class="form-control" id="cFullName"  ng-model="FullName" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <br />
+            <div class="row">
+                <form name="addclientcontact" style="width: 900px; margin: 0px auto;" ng-show="ClientExist">
+                    <div class="form-group">
+                        <label for="type" class="col-sm-2 control-label">Contact Type:</label>
+                        <div class="col-sm-9 space">
+                            <select type="text" class="form-control" id="TypeID" ng-options="t.ContactType for t in typeList" ng-model="SelectedContactTypeID" ng-change="SetInformation(SelectedContactTypeID)" required>
+                                <option value="" label="Select"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="CaptureInformation">
+                        <label for="cname" class="col-sm-2 control-label">{{ContactTypeInfor}} :</label>
+                        <div class="col-sm-10 space" ng-show="AdresstInfo">
+                            <textarea type="text" class="form-control" id="cAddress" placeholder="enter  address" ng-model="Address" required ></textarea>
+                        </div>
+                        <div class="col-sm-10 space" ng-show="ContactInfo">
+                            <input type="text" class="form-control" id="cContact" placeholder="enter contact number" ng-model="ContactNumber" required />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" value="Insert" ng-click="add()" ng-show="addShow"   class="btn btn-primary" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" style="width: 900px; margin: 0px auto;">
+                            <tr>
+                                <th>No.</th>
+                                <th>Contact Type</th>
+                                <th>Contact Information</th>
+                            </tr>
+                            <tr ng-repeat="contact in contactList">
+                                <td>
+                                    <p>{{ $index+1 }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ contact.ContactType }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ contact.ContactInformation }}</p>
+                                </td>
+                                <td>
+                                    <p> <a ng-click="delete(contact)" href="javascript:void(0);">Delete</a></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>    
+       </div>
+    </div>
